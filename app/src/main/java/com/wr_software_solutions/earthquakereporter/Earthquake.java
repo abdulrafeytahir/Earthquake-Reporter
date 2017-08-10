@@ -29,6 +29,14 @@ public class Earthquake {
         this.mLatitude = mLatitude;
     }
 
+    public double getmLongitude() {
+        return mLongitude;
+    }
+
+    public double getmLatitude() {
+        return mLatitude;
+    }
+
     public double getmMagnitue() {
         return mMagnitue;
     }

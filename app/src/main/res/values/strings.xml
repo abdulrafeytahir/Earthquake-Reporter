@@ -28,5 +28,6 @@
 
     <!-- Label for perceived strength value [CHAR LIMIT=40] -->
     <string name="perceived_strength">Perceived Strength</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

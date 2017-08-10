@@ -1,10 +1,12 @@
 package com.wr_software_solutions.earthquakereporter;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-
 
 import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.mCurrentEarthquake;
 
@@ -45,5 +47,13 @@ public class EarthquakeDetails extends AppCompatActivity {
         String numOfPeople = mCurrentEarthquake.getmNumOfPeople().toString() + " people felt it";
         peopleFeltIt.setText(numOfPeople.toString());
 
+        Button button = (Button) findViewById(R.id.maps_activity_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EarthquakeDetails.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

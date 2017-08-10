@@ -68,6 +68,16 @@
             android:textAppearance="?android:textAppearanceMedium"
             tools:text="5 people felt it" />
 
+        <Button
+            android:id="@+id/maps_activity_button"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/maps_button"
+            android:onClick="open_maps_activity"
+            android:text="Show on map" />
+
     </LinearLayout>
 
 </ScrollView>

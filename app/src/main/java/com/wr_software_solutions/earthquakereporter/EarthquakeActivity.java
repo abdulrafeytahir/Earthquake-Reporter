@@ -63,7 +63,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
         earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 //                // Find the current earthquake that was clicked on
 //                Earthquake currentEarthquake = mAdapter.getItem(i);
 //
@@ -76,7 +76,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 //                // Send the intent to launch a new activity
 //                startActivity(websiteIntent);
 
-                mCurrentEarthquake = mAdapter.getItem(i);
+                mCurrentEarthquake = mAdapter.getItem(position);
                 Intent intent = new Intent(EarthquakeActivity.this, EarthquakeDetails.class);
                 startActivity(intent);
             }

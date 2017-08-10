@@ -147,14 +147,20 @@ public final class QueryUtils {
                 String url = properties.getString("url");
                 String title = properties.getString("title");
                 String numberOfPeople = properties.getString("felt");
-                double perceivedStrength = properties.getDouble("cdi");
+                String perceivedStrength = properties.getString("cdi");
+                double strength = 0;
+                if (perceivedStrength.equals(null)) {
+                    strength = Double.parseDouble(perceivedStrength);
+                } else {
+                    strength = magnitude;
+                }
                 int tsunami = properties.getInt("tsunami");
 
                 JSONObject geometry = currentEarthquake.getJSONObject("geometry");
                 JSONArray coordinates = geometry.getJSONArray("coordinates");
                 double depth = coordinates.getDouble(2);
 
-                earthquakes.add(new Earthquake(magnitude, place, time, url, title, numberOfPeople, perceivedStrength, tsunami, depth));
+                earthquakes.add(new Earthquake(magnitude, place, time, url, title, numberOfPeople, strength, tsunami, depth));
             }
 
         } catch (JSONException e) {

@@ -32,7 +32,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     /**
      * URL for USGS query
      */
-    private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=6&limit=10";
+    private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?";
     /**
      * Constant value for the earthquake loader ID. We can choose any integer.
      */
@@ -138,7 +138,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         uriBuilder.appendQueryParameter("format", "geojson");
-        uriBuilder.appendQueryParameter("limit", "10");
+        uriBuilder.appendQueryParameter("limit", "100");
         uriBuilder.appendQueryParameter("minmag", minMagnitude);
         uriBuilder.appendQueryParameter("orderby", orderBy);
 
@@ -161,6 +161,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
             mAdapter.addAll(data);
         } else {
             // Set empty state text to display "No earthquakes found."
+            mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
             mEmptyStateTextView.setText(R.string.empty_listview);
         }
 

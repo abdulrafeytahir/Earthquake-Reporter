@@ -11,8 +11,11 @@ public class Earthquake {
     private double mPerceivedStrength;
     private int mTsunamiAlert;
     private double mDepth;
+    private double mLongitude;
+    private double mLatitude;
 
-    public Earthquake(double mMagnitue, String mPlace, long mTime, String mURL, String mTitle, String mNumOfPeople, double mPerceivedStrength, int mTsunamiAlert, double mDepth) {
+    public Earthquake(double mMagnitue, String mPlace, long mTime, String mURL, String mTitle, String mNumOfPeople,
+                      double mPerceivedStrength, int mTsunamiAlert, double mDepth, double mLongitude, double mLatitude) {
         this.mMagnitue = mMagnitue;
         this.mPlace = mPlace;
         this.mTime = mTime;
@@ -22,6 +25,8 @@ public class Earthquake {
         this.mPerceivedStrength = mPerceivedStrength;
         this.mTsunamiAlert = mTsunamiAlert;
         this.mDepth = mDepth;
+        this.mLongitude = mLongitude;
+        this.mLatitude = mLatitude;
     }
 
     public double getmMagnitue() {

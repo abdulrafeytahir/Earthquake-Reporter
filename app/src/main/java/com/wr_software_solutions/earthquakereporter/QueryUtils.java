@@ -158,9 +158,11 @@ public final class QueryUtils {
 
                 JSONObject geometry = currentEarthquake.getJSONObject("geometry");
                 JSONArray coordinates = geometry.getJSONArray("coordinates");
+                double longitude = coordinates.getDouble(0);
+                double latitude = coordinates.getDouble(1);
                 double depth = coordinates.getDouble(2);
 
-                earthquakes.add(new Earthquake(magnitude, place, time, url, title, numberOfPeople, strength, tsunami, depth));
+                earthquakes.add(new Earthquake(magnitude, place, time, url, title, numberOfPeople, strength, tsunami, depth, longitude, latitude));
             }
 
         } catch (JSONException e) {

@@ -1,7 +1,8 @@
 package com.wr_software_solutions.earthquakereporter;
 
-import android.support.v4.app.FragmentActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,6 +12,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.mCurrentEarthquake;
+import static com.wr_software_solutions.earthquakereporter.utilities.QueryUtils.mLatitude;
+import static com.wr_software_solutions.earthquakereporter.utilities.QueryUtils.mLongitude;
+import static com.wr_software_solutions.earthquakereporter.utilities.QueryUtils.mPlace;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -40,9 +44,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        double longitude = mCurrentEarthquake.getmLongitude();
-        double latitude = mCurrentEarthquake.getmLatitude();
-        String place = mCurrentEarthquake.getmPlace();
+        double longitude = 0;
+        double latitude = 0;
+        String place = "";
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(Intent.EXTRA_TEXT)) {
+            longitude = mCurrentEarthquake.getmLongitude();
+            latitude = mCurrentEarthquake.getmLatitude();
+            place = mCurrentEarthquake.getmPlace();
+        } else {
+            latitude = mLatitude;
+            longitude = mLongitude;
+            place = mPlace;
+        }
+
+
 
         // Add a marker in Sydney and move the camera
         LatLng quakeLocation = new LatLng(latitude, longitude);

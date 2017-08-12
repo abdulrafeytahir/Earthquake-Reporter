@@ -54,6 +54,7 @@ public class EarthquakeDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(EarthquakeDetails.this, MapsActivity.class);
+                intent.putExtra(Intent.EXTRA_TEXT, true);
                 startActivity(intent);
             }
         });

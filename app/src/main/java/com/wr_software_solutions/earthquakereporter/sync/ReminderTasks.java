@@ -9,8 +9,6 @@ import com.wr_software_solutions.earthquakereporter.utilities.QueryUtils;
 
 import java.util.List;
 
-import static java.security.AccessController.getContext;
-
 /**
  * Created by user on 12-Aug-17.
  */
@@ -24,16 +22,16 @@ public class ReminderTasks {
         if (ACTION_EARTHQUAKE_REMINDER.equals(action)) {
             String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?";
 
-//            Uri baseUri = Uri.parse(USGS_REQUEST_URL);
-//            final Uri.Builder uriBuilder = baseUri.buildUpon();
-//
-//            uriBuilder.appendQueryParameter("format", "geojson");
-//            uriBuilder.appendQueryParameter("limit", "1");
-//            uriBuilder.appendQueryParameter("minmag", "2");
-//            uriBuilder.appendQueryParameter("orderby", "time");
-//
-//            List<Earthquake> earthquakes = QueryUtils.extractEarthquakes(uriBuilder.toString(), true, context);
-            NotificationUtils.earthquakeReminder(context);
+            Uri baseUri = Uri.parse(USGS_REQUEST_URL);
+            final Uri.Builder uriBuilder = baseUri.buildUpon();
+
+            uriBuilder.appendQueryParameter("format", "geojson");
+            uriBuilder.appendQueryParameter("limit", "1");
+            uriBuilder.appendQueryParameter("minmag", "2");
+            uriBuilder.appendQueryParameter("orderby", "time");
+
+            List<Earthquake> earthquakes = QueryUtils.extractEarthquakes(uriBuilder.toString(), true, context);
+
         } else if (ACTION_DISMISS_NOTIFICATION.equals(action)) {
             NotificationUtils.clearAllNotification(context);
         }

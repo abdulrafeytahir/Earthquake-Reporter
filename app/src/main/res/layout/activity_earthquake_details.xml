@@ -70,6 +70,7 @@
 
         <Button
             android:id="@+id/maps_activity_button"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

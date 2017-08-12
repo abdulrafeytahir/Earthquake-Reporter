@@ -20,9 +20,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.wr_software_solutions.earthquakereporter.sync.EarthquakeIntentService;
-import com.wr_software_solutions.earthquakereporter.sync.EarthquakeRemiderFirebaseJobService;
-import com.wr_software_solutions.earthquakereporter.sync.ReminderTasks;
 import com.wr_software_solutions.earthquakereporter.sync.ReminderUtilities;
 
 import java.util.ArrayList;
@@ -44,7 +41,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     private static final int EARTHQUAKE_LOADER_ID = 1;
 
     public static Earthquake mCurrentEarthquake;
-    private static Boolean isIntentFired = false;
     /**
      * Adapter for the list of earthquakes
      */

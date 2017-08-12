@@ -48,6 +48,8 @@ public class EarthquakeDetails extends AppCompatActivity {
         peopleFeltIt.setText(numOfPeople.toString());
 
         Button button = (Button) findViewById(R.id.maps_activity_button);
+        button.setBackgroundResource(R.drawable.maps_button);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

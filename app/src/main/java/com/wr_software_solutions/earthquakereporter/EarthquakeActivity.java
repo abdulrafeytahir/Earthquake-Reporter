@@ -20,6 +20,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.wr_software_solutions.earthquakereporter.sync.EarthquakeIntentService;
+import com.wr_software_solutions.earthquakereporter.sync.EarthquakeRemiderFirebaseJobService;
+import com.wr_software_solutions.earthquakereporter.sync.ReminderTasks;
+import com.wr_software_solutions.earthquakereporter.sync.ReminderUtilities;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +42,9 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
      * Constant value for the earthquake loader ID. We can choose any integer.
      */
     private static final int EARTHQUAKE_LOADER_ID = 1;
+
     public static Earthquake mCurrentEarthquake;
+    private static Boolean isIntentFired = false;
     /**
      * Adapter for the list of earthquakes
      */
@@ -51,6 +58,11 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
+
+
+        // Setting up background earthquake reminder Job schedueler to generate earthquake notifications
+        ReminderUtilities.scheduleEarthquakeReminder(this);
+
 
         // Create a ListView to hold earthquake data
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
@@ -110,6 +122,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

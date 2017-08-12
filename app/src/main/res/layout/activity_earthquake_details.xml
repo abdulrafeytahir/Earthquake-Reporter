@@ -74,7 +74,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:background="@drawable/maps_button"
             android:onClick="open_maps_activity"
             android:text="Show on map" />
 

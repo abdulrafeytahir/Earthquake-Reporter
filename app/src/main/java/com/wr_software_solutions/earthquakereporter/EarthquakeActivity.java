@@ -2,23 +2,29 @@
 package com.wr_software_solutions.earthquakereporter;
 
 
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wr_software_solutions.earthquakereporter.sync.ReminderUtilities;
 
@@ -31,24 +37,21 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     // LOG TAG created for logging purposes.
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
-    /**
-     * URL for USGS query
-     */
+    /*** URL for USGS query*/
     private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?";
-    /**
-     * Constant value for the earthquake loader ID. We can choose any integer.
-     */
+
+    /*** Constant value for the earthquake loader ID. We can choose any integer.*/
     private static final int EARTHQUAKE_LOADER_ID = 1;
 
+    /*variable to hold current earthquake data*/
     public static Earthquake mCurrentEarthquake;
-    /**
-     * Adapter for the list of earthquakes
-     */
+
+    /*** Adapter for the list of earthquakes*/
     private EarthquakeAdapter mAdapter;
-    /**
-     * TextView that is displayed when the list is empty
-     */
+
+    /*** TextView that is displayed when the list is empty*/
     private TextView mEmptyStateTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
         // Setting up background earthquake reminder Job schedueler to generate earthquake notifications
         ReminderUtilities.scheduleEarthquakeReminder(this);
-
 
         // Create a ListView to hold earthquake data
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
@@ -72,19 +74,8 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                // Find the current earthquake that was clicked on
-//                Earthquake currentEarthquake = mAdapter.getItem(i);
-//
-//                // Convert the String URL into a URI object (to pass into the Intent constructor)
-//                Uri earthquakeUri = Uri.parse(currentEarthquake.getmURL());
-//
-//                // Create a new intent to view the earthquake URI
-//                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
-//
-//                // Send the intent to launch a new activity
-//                startActivity(websiteIntent);
-
                 mCurrentEarthquake = mAdapter.getItem(position);
+//                Toast.makeText(EarthquakeActivity.this, "Earthquake location coordinates: " + mCurrentEarthquake.getmLongitude()  + " and " +  mCurrentEarthquake.getmLatitude(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(EarthquakeActivity.this, EarthquakeDetails.class);
                 startActivity(intent);
             }
@@ -113,12 +104,12 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.wr_software_solutions.earthquakereporter.Coordinates;
 import com.wr_software_solutions.earthquakereporter.Earthquake;
 
 import org.json.JSONArray;
@@ -20,6 +21,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +29,8 @@ import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.LO
 
 public final class QueryUtils {
 
-    public static double mLatitude;
-    public static double mLongitude;
-    public static String mPlace;
+    public static Coordinates mEarthquakeCoordinates;
     private static Boolean mNotificationService;
-    private static Context mContext;
 
 
     private QueryUtils() {
@@ -41,11 +40,10 @@ public final class QueryUtils {
      * Return a list of {@link Earthquake} objects that has been built up from
      * parsing a JSON response.
      */
-    public static List<Earthquake> extractEarthquakes(String requestURL, Boolean notificationService, Context context) {
+    public static List<Earthquake> extractEarthquakes(String requestURL, Boolean notificationService) {
 
         URL url = createUrl(requestURL);
         mNotificationService = notificationService;
-        mContext = context;
 
         String jsonResponse = "";
         try {
@@ -154,6 +152,8 @@ public final class QueryUtils {
                 JSONObject currentEarthquake = earthquakeArray.getJSONObject(i);
                 JSONObject properties = currentEarthquake.getJSONObject("properties");
                 double magnitude = properties.getDouble("mag");
+                DecimalFormat oneDigit = new DecimalFormat("#,##0.0");
+                magnitude = Double.valueOf(oneDigit.format(magnitude));
                 String place = properties.getString("place");
                 long time = properties.getLong("time");
                 String url = properties.getString("url");
@@ -177,11 +177,10 @@ public final class QueryUtils {
                 if (mNotificationService == false) {
                     earthquakes.add(new Earthquake(magnitude, place, time, url, title,
                             numberOfPeople, strength, tsunami, depth, longitude, latitude));
+
                 } else {
-                    mLatitude = latitude;
-                    mLongitude = longitude;
-                    mPlace = place;
-                    NotificationUtils.earthquakeReminder(mContext);
+
+                    mEarthquakeCoordinates = new Coordinates(latitude, longitude, place);
                 }
             }
 

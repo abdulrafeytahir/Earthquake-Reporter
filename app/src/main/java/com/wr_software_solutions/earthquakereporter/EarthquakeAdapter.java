@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.LOG_TAG;
+import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.mCurrentEarthquake;
 
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
@@ -77,6 +81,8 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         TextView quakteTime = (TextView) listItemView.findViewById(R.id.time);
         quakteTime.setText(date);
+
+        // Log.d(LOG_TAG, "Earthquake location coordinates: " + mCurrentEarthquake.getmLongitude()  + " " +  mCurrentEarthquake.getmLatitude());
 
         return listItemView;
     }

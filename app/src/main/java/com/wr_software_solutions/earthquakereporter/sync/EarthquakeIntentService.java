@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 
 /**
- * Created by user on 12-Aug-17.
+ * Created by user on 13-Aug-17.
  */
 
 public class EarthquakeIntentService extends IntentService {

@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.wr_software_solutions.earthquakereporter.MapsActivity;
 import com.wr_software_solutions.earthquakereporter.R;
+import com.wr_software_solutions.earthquakereporter.UserLocation;
 
 /**
  * Created by user on 12-Aug-17.
@@ -26,14 +27,12 @@ public class NotificationUtils {
         notificationManager.cancelAll();
     }
 
-    public static void earthquakeReminder(Context context) {
+    public static void earthquakeReminder(Context context, double distance) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle("Earthquake Notification")
-                        .setContentText("An earthquake occured in your vicinity")
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText("An earthquake occured in your vicinity"))
+                        .setContentText("Earthquake distance: " + distance)
                         .setDefaults(Notification.DEFAULT_SOUND)
                         .setContentIntent(contentIntent(context))
                         .setAutoCancel(true);

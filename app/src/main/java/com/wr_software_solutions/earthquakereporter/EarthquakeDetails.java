@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.mCurrentEarthquake;
 
-
 public class EarthquakeDetails extends AppCompatActivity {
 
     @Override
@@ -31,9 +30,9 @@ public class EarthquakeDetails extends AppCompatActivity {
 
         TextView depth = (TextView) findViewById(R.id.depth);
         String d = "Depth: " + String.valueOf(mCurrentEarthquake.getmDepth()) + " km";
-        depth.setText(d.toString());
+        depth.setText(d);
 
-        String alert = null;
+        String alert;
         TextView tsunamiAlert = (TextView) findViewById(R.id.tsunami_alert);
         if (mCurrentEarthquake.getmTsunamiAlert() == 0) {
             alert = "Tsunami alert issued: No";
@@ -41,11 +40,11 @@ public class EarthquakeDetails extends AppCompatActivity {
             alert = "Tsunami alert issued: Yes";
         }
 
-        tsunamiAlert.setText(alert.toString());
+        tsunamiAlert.setText(alert);
 
         TextView peopleFeltIt = (TextView) findViewById(R.id.number_of_people);
-        String numOfPeople = mCurrentEarthquake.getmNumOfPeople().toString() + " people felt it";
-        peopleFeltIt.setText(numOfPeople.toString());
+        String numOfPeople = mCurrentEarthquake.getmNumOfPeople() + " people felt it";
+        peopleFeltIt.setText(numOfPeople);
 
         Button button = (Button) findViewById(R.id.maps_activity_button);
         button.setBackgroundResource(R.drawable.maps_button);

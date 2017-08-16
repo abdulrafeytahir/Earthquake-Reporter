@@ -1,30 +1,22 @@
-
 package com.wr_software_solutions.earthquakereporter;
 
-
-import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
-import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wr_software_solutions.earthquakereporter.sync.ReminderUtilities;
 
@@ -57,7 +49,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
-
 
         // Setting up background earthquake reminder Job schedueler to generate earthquake notifications
         ReminderUtilities.scheduleEarthquakeReminder(this);
@@ -101,7 +92,6 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
             mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
-
     }
 
 

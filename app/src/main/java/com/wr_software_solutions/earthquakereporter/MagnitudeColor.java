@@ -3,7 +3,6 @@ package com.wr_software_solutions.earthquakereporter;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 
-
 public class MagnitudeColor {
 
     private Context mContext;

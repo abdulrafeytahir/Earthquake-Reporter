@@ -8,7 +8,7 @@ import com.wr_software_solutions.earthquakereporter.utilities.QueryUtils;
 import java.util.List;
 
 public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
-    private static final String LOG_TAG = "";
+
     private String mURL;
 
     public EarthquakeLoader(Context context, String url) {

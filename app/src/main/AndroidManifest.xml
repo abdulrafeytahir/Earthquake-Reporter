@@ -23,25 +23,35 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".EarthquakeActivity">
+        <activity
+            android:name=".EarthquakeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity">
-            android:label="@string/settings_title">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings_title"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wr_software_solutions.earthquakereporter.EarthquakeActivity" />
         </activity>
-        <activity android:name=".EarthquakeDetails" />
-        <activity android:name=".MapsActivity" />
+        <activity
+            android:name=".EarthquakeDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MapsActivity"
+            android:screenOrientation="portrait" />
 
         <service
-            android:name=".sync.EarthquakeRemiderFirebaseJobService"
-            android:exported="false" />
+            android:name=".sync.EarthquakeReminderFirebaseJobService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <service
             android:name=".sync.EarthquakeIntentService"
             android:exported="false">
@@ -50,8 +60,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".UserLocation" />
-        <activity android:name=".UserLocationActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package com.wr_software_solutions.earthquakereporter;
 
-
 public class Earthquake {
     private double mMagnitue;
     private String mPlace;
@@ -47,10 +46,6 @@ public class Earthquake {
 
     public long getmTime() {
         return mTime;
-    }
-
-    public String getmURL() {
-        return mURL;
     }
 
     public int getmTsunamiAlert() {

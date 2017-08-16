@@ -18,7 +18,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.LOG_TAG;
 import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.mCurrentEarthquake;
@@ -45,21 +44,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        String earthquakePlace = "";
+        String earthquakePlace;
 
         Intent intent = getIntent();
         if (intent.hasExtra(Intent.EXTRA_TEXT)) {
@@ -67,14 +56,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.d(LOG_TAG, "Earthquake location coordinates: " + mCurrentEarthquake.getmLongitude() + " " + mCurrentEarthquake.getmLatitude());
             latLngs.add(new LatLng(mCurrentEarthquake.getmLatitude(), mCurrentEarthquake.getmLongitude()));
             mMarkerA = mMap.addMarker(new MarkerOptions().position(latLngs.get(0)).title(earthquakePlace));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngs.get(0)));
-//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngs.get(0), 6.0f));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngs.get(0)));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngs.get(0), 6.0f));
 
         } else {
             mLocation = mUserLocation.getmLocation();
             Log.d(LOG_TAG, "User location coordinates" + mLocation.getLatitude() + mLocation.getLongitude());
             latLngs.add(new LatLng(mLocation.getLatitude(), mLocation.getLongitude()));
-            latLngs.add(new LatLng(mEarthquakeCoordinates.getmLatidue(), mEarthquakeCoordinates.getGetmLongitude()));
+            latLngs.add(new LatLng(mEarthquakeCoordinates.getmLatidue(), mEarthquakeCoordinates.getmLongitude()));
             earthquakePlace = mEarthquakeCoordinates.getmPlace();
 
             mMarkerA = mMap.addMarker(new MarkerOptions().position(latLngs.get(1)).title(earthquakePlace));

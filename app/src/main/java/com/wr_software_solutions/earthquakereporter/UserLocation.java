@@ -11,13 +11,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.nearby.messages.Distance;
-
-import static android.webkit.WebSettings.RenderPriority.HIGH;
-
-/**
- * Created by user on 14-Aug-17.
- */
 
 public class UserLocation implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -40,7 +33,7 @@ public class UserLocation implements GoogleApiClient.ConnectionCallbacks,
         return null;
     }
 
-    protected synchronized void buildGoogleApiClient() {
+    private synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(mContext)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -60,7 +53,6 @@ public class UserLocation implements GoogleApiClient.ConnectionCallbacks,
         } catch (SecurityException e) {
             Log.e(LOG_TAG, "Security exception occured while gettling user location");
         }
-
     }
 
     @Override

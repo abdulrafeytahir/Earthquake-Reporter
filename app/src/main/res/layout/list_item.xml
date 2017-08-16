@@ -6,7 +6,6 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
-
     <TextView
         android:id="@+id/mag"
         android:layout_width="36dp"

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.LOG_TAG;
-import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.mCurrentEarthquake;
+class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
-public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
-
-    public EarthquakeAdapter(Activity context, List<Earthquake> objects) {
+    EarthquakeAdapter(Activity context, List<Earthquake> objects) {
         super(context, 0, objects);
     }
 
@@ -51,8 +47,8 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         String location = currentListItem.getmPlace();
         String separator = " of ";
-        String distanceOfQuake = null;
-        String locationOfQuake = null;
+        String distanceOfQuake;
+        String locationOfQuake;
         if (location.contains(separator)) {
             String[] parts = location.split(separator);
             distanceOfQuake = parts[0] + separator;
@@ -79,12 +75,9 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         sdf = new SimpleDateFormat("hh:mm a");
         date = sdf.format(dateObject);
 
-        TextView quakteTime = (TextView) listItemView.findViewById(R.id.time);
-        quakteTime.setText(date);
-
-        // Log.d(LOG_TAG, "Earthquake location coordinates: " + mCurrentEarthquake.getmLongitude()  + " " +  mCurrentEarthquake.getmLatitude());
+        TextView quakeTime = (TextView) listItemView.findViewById(R.id.time);
+        quakeTime.setText(date);
 
         return listItemView;
     }
-
 }

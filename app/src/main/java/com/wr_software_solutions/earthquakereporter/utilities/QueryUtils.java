@@ -1,6 +1,5 @@
 package com.wr_software_solutions.earthquakereporter.utilities;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -62,7 +61,7 @@ public final class QueryUtils {
      */
     @Nullable
     private static URL createUrl(String stringUrl) {
-        URL url = null;
+        URL url;
         try {
             url = new URL(stringUrl);
         } catch (MalformedURLException exception) {
@@ -142,7 +141,7 @@ public final class QueryUtils {
             return null;
         }
 
-        List<Earthquake> earthquakes = new ArrayList<Earthquake>();
+        List<Earthquake> earthquakes = new ArrayList<>();
 
         try {
 
@@ -160,7 +159,7 @@ public final class QueryUtils {
                 String title = properties.getString("title");
                 String numberOfPeople = properties.getString("felt");
                 String perceivedStrength = properties.getString("cdi");
-                double strength = 0;
+                double strength;
                 if (perceivedStrength.equals(null)) {
                     strength = Double.parseDouble(perceivedStrength);
                 } else {

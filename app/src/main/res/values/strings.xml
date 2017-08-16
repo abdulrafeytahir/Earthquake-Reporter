@@ -28,7 +28,6 @@
 
     <!-- Label for perceived strength value [CHAR LIMIT=40] -->
     <string name="perceived_strength">Perceived Strength</string>
-    <string name="title_activity_maps">Map</string>
 
     <string name="gps_network_not_enabled">GPS Network Not Enabled</string>
     <string name="open_location_settings">Turn It On</string>

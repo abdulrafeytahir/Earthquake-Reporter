@@ -1,17 +1,13 @@
 package com.wr_software_solutions.earthquakereporter;
 
-/**
- * Created by user on 15-Aug-17.
- */
-
 public class Coordinates {
     private double mLatidue;
-    private double getmLongitude;
+    private double mLongitude;
     private String mPlace;
 
-    public Coordinates(double mLatidue, double getmLongitude, String mPlace) {
-        this.mLatidue = mLatidue;
-        this.getmLongitude = getmLongitude;
+    public Coordinates(double mLatitude, double mLongitude, String mPlace) {
+        this.mLatidue = mLatitude;
+        this.mLongitude = mLongitude;
         this.mPlace = mPlace;
     }
 
@@ -19,8 +15,8 @@ public class Coordinates {
         return mLatidue;
     }
 
-    public double getGetmLongitude() {
-        return getmLongitude;
+    public double getmLongitude() {
+        return mLongitude;
     }
 
     public String getmPlace() {

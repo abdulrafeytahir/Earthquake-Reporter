@@ -19,11 +19,6 @@ import com.wr_software_solutions.earthquakereporter.R;
 
 import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.LOG_TAG;
 
-
-/**
- * Created by user on 12-Aug-17.
- */
-
 public class ReminderUtilities {
 
     private static final int REMINDER_INTERVAL_SECONDS = 10;
@@ -34,9 +29,6 @@ public class ReminderUtilities {
     private static boolean sInitialized;
 
     private static Context mContext;
-    private static AsyncTask backgroundAlert;
-
-    private AsyncTask Alertbox;
 
     synchronized public static void scheduleEarthquakeReminder(final Context context) {
         if (sInitialized)
@@ -44,8 +36,6 @@ public class ReminderUtilities {
 
         mContext = context;
         gpsEnabled();
-
-
     }
 
     private static void scheduleJob() {
@@ -53,7 +43,7 @@ public class ReminderUtilities {
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
 
         Job constraintReminderJob = dispatcher.newJobBuilder()
-                .setService(EarthquakeRemiderFirebaseJobService.class)
+                .setService(EarthquakeReminderFirebaseJobService.class)
                 .setTag(REMINDER_JOB_TAG)
                 .setLifetime(Lifetime.FOREVER)
                 .setRecurring(true)
@@ -78,7 +68,7 @@ public class ReminderUtilities {
             Log.d(LOG_TAG, "Error occured in getting Provider " + ex);
         }
 
-        if (!gps_enabled[0]) {
+        if (gps_enabled[0] == false) {
             // notify user
             final AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
             dialog.setMessage((R.string.gps_network_not_enabled));
@@ -86,7 +76,6 @@ public class ReminderUtilities {
                 @Override
                 public void onClick(DialogInterface paramDialogInterface, int paramInt) {
                     mContext.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-
                 }
             });
             dialog.setNegativeButton((R.string.cancel), new DialogInterface.OnClickListener() {
@@ -99,7 +88,7 @@ public class ReminderUtilities {
             dialog.show();
         }
 
-        backgroundAlert = new AsyncTask() {
+        AsyncTask backgroundAlert = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
                 while (true) {
@@ -127,7 +116,5 @@ public class ReminderUtilities {
             }
         };
         backgroundAlert.execute();
-
     }
-
 }

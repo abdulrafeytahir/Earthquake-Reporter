@@ -21,8 +21,8 @@ import java.util.Arrays;
 
 import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.LOG_TAG;
 import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.mCurrentEarthquake;
+import static com.wr_software_solutions.earthquakereporter.sync.ReminderTasks.mReminderEarthquake;
 import static com.wr_software_solutions.earthquakereporter.sync.ReminderTasks.mUserLocation;
-import static com.wr_software_solutions.earthquakereporter.utilities.QueryUtils.mEarthquakeCoordinates;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -63,8 +63,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mLocation = mUserLocation.getmLocation();
             Log.d(LOG_TAG, "User location coordinates" + mLocation.getLatitude() + mLocation.getLongitude());
             latLngs.add(new LatLng(mLocation.getLatitude(), mLocation.getLongitude()));
-            latLngs.add(new LatLng(mEarthquakeCoordinates.getmLatidue(), mEarthquakeCoordinates.getmLongitude()));
-            earthquakePlace = mEarthquakeCoordinates.getmPlace();
+            latLngs.add(new LatLng(mReminderEarthquake.getmLatitude(), mReminderEarthquake.getmLongitude()));
+            earthquakePlace = mReminderEarthquake.getmPlace();
 
             mMarkerA = mMap.addMarker(new MarkerOptions().position(latLngs.get(1)).title(earthquakePlace));
 //            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngs.get(1)));

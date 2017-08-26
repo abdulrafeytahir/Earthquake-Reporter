@@ -7,20 +7,27 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
 
+import com.wr_software_solutions.earthquakereporter.Earthquake;
 import com.wr_software_solutions.earthquakereporter.UserLocation;
 import com.wr_software_solutions.earthquakereporter.utilities.NotificationUtils;
 import com.wr_software_solutions.earthquakereporter.utilities.QueryUtils;
 
-import static com.wr_software_solutions.earthquakereporter.utilities.QueryUtils.mEarthquakeCoordinates;
+import java.text.DecimalFormat;
+import java.util.List;
+
 
 public class ReminderTasks {
 
     public static String ACTION_EARTHQUAKE_REMINDER = "earthquake-reminder";
     public static String ACTION_DISMISS_NOTIFICATION = "dismiss-notification";
     public static UserLocation mUserLocation;
+    public static Earthquake mReminderEarthquake;
 
     public static void executeTask(Context context, String action) {
 
+        int distance = 0;
+        int earthquakeRange = 0;
+        int magnitude;
         if (ACTION_EARTHQUAKE_REMINDER.equals(action)) {
 
             ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -45,21 +52,55 @@ public class ReminderTasks {
                 uriBuilder.appendQueryParameter("minmag", "2");
                 uriBuilder.appendQueryParameter("orderby", "time");
 
-                double distance = 0;
+
                 try {
                     mUserLocation = new UserLocation(context);
 
-                    QueryUtils.extractEarthquakes(uriBuilder.toString(), true);
-
-                    distance = distanceInKilometers(mEarthquakeCoordinates.getmLatidue(),
+                    List<Earthquake> currentEarthquake = QueryUtils.extractEarthquakes(uriBuilder.toString(), true);
+                    mReminderEarthquake = currentEarthquake.get(0);
+                    distance = distanceInKilometers(mReminderEarthquake.getmLatitude(),
                             mUserLocation.getmLocation().getLatitude(),
-                            mEarthquakeCoordinates.getmLongitude(),
+                            mReminderEarthquake.getmLongitude(),
                             mUserLocation.getmLocation().getLongitude());
                 } catch (NullPointerException e) {
                     Log.e("ReminderTask", "Error occured while getting user location: " + e);
                 }
 
-                if (distance < 30000) {
+                magnitude = (int) Math.floor(mReminderEarthquake.getmMagnitue());
+                switch (magnitude) {
+                    case 1:
+                        earthquakeRange = 5;
+                        break;
+                    case 2:
+                        earthquakeRange = 10;
+                        break;
+                    case 3:
+                        earthquakeRange = 20;
+                        break;
+                    case 4:
+                        earthquakeRange = 50;
+                        break;
+                    case 5:
+                        earthquakeRange = 150;
+                        break;
+                    case 6:
+                        earthquakeRange = 350;
+                        break;
+                    case 7:
+                        earthquakeRange = 900;
+                        break;
+                    case 8:
+                        earthquakeRange = 2500;
+                        break;
+                    case 9:
+                        earthquakeRange = 7000;
+                        break;
+                    case 10:
+                        earthquakeRange = 18000;
+                        break;
+
+                }
+                if (distance <= earthquakeRange) {
                     NotificationUtils.earthquakeReminder(context, distance);
                 }
             }
@@ -68,7 +109,7 @@ public class ReminderTasks {
         }
     }
 
-    private static double distanceInKilometers(double lat1, double lat2, double lon1, double lon2) {
+    private static int distanceInKilometers(double lat1, double lat2, double lon1, double lon2) {
 
         final int R = 6371; // Radius of the earth
 
@@ -82,6 +123,8 @@ public class ReminderTasks {
 
         distance = Math.pow(distance, 2);
 
-        return Math.sqrt(distance);
+        distance = Math.sqrt(distance);
+
+        return (int) Math.floor(distance);
     }
 }

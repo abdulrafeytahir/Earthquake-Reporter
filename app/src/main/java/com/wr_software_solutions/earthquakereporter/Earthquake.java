@@ -28,6 +28,13 @@ public class Earthquake {
         this.mLatitude = mLatitude;
     }
 
+    public Earthquake(double mMagnitue, String mPlace, double mLongitude, double mLatitude) {
+        this.mMagnitue = mMagnitue;
+        this.mPlace = mPlace;
+        this.mLongitude = mLongitude;
+        this.mLatitude = mLatitude;
+    }
+
     public double getmLongitude() {
         return mLongitude;
     }

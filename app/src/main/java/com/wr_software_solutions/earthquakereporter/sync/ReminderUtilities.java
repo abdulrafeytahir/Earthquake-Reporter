@@ -21,7 +21,7 @@ import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.LO
 
 public class ReminderUtilities {
 
-    private static final int REMINDER_INTERVAL_SECONDS = 10;
+    private static final int REMINDER_INTERVAL_SECONDS = 120;
     private static final int SYNC_FLEXTIME_SECONDS = REMINDER_INTERVAL_SECONDS;
 
     private static final String REMINDER_JOB_TAG = "earthquake_reminder_tag";

@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.wr_software_solutions.earthquakereporter.Coordinates;
 import com.wr_software_solutions.earthquakereporter.Earthquake;
 
 import org.json.JSONArray;
@@ -28,7 +27,6 @@ import static com.wr_software_solutions.earthquakereporter.EarthquakeActivity.LO
 
 public final class QueryUtils {
 
-    public static Coordinates mEarthquakeCoordinates;
     private static Boolean mNotificationService;
 
 
@@ -178,8 +176,7 @@ public final class QueryUtils {
                             numberOfPeople, strength, tsunami, depth, longitude, latitude));
 
                 } else {
-
-                    mEarthquakeCoordinates = new Coordinates(latitude, longitude, place);
+                    earthquakes.add(new Earthquake(magnitude, place, longitude, latitude));
                 }
             }
 

@@ -1,4 +1,4 @@
-package com.wr_software_solutions.earthquakereporter.utilities;
+package com.wartech.earthquakerepoter.utilities;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -11,8 +11,8 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
-import com.wr_software_solutions.earthquakereporter.MapsActivity;
-import com.wr_software_solutions.earthquakereporter.R;
+import com.wartech.earthquakerepoter.MapsActivity;
+import com.wartech.earthquakerepoter.R;
 
 public class NotificationUtils {
 
@@ -25,7 +25,7 @@ public class NotificationUtils {
         notificationManager.cancelAll();
     }
 
-    public static void earthquakeReminder(Context context, double distance) {
+    public static void earthquakeReminder(Context context, int distance) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
